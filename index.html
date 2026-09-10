@@ -189,6 +189,11 @@
   .card-grid{ display:grid; grid-template-columns: repeat(2,1fr); gap: 24px; margin-top: 24px; }
   @media (max-width: 760px){ .card-grid{ grid-template-columns: 1fr; } }
   .mini-card{ padding: 34px; }
+  .mini-card.clickable{ display:block; cursor:pointer; transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+  .mini-card.clickable:hover{ border-color: rgba(134,217,240,0.45); transform: translateY(-3px); box-shadow: 0 20px 50px -24px rgba(0,0,0,0.7); }
+  .mini-card .open-app{ display:inline-flex; align-items:center; gap:7px; margin-top:20px; font-size:13.5px; font-weight:500; color: var(--cyan); }
+  .mini-card .open-app svg{ width:12px; height:12px; transition: transform .2s ease; }
+  .mini-card.clickable:hover .open-app svg{ transform: translateX(3px); }
   .mini-card p.desc{ color: var(--text-muted); font-size: 14.5px; line-height:1.65; margin-bottom: 28px; }
   .mini-card .divider{ border-top: 1px solid var(--border); padding-top: 18px; display:flex; align-items:baseline; gap:14px; }
   .mini-card .m-label{ font-family: var(--mono); font-size: 10.5px; letter-spacing:0.1em; text-transform:uppercase; color: var(--text-faint); white-space:nowrap; }
@@ -290,6 +295,125 @@
 
   .route{ display:none; }
   .route.active{ display:block; }
+
+  /* ===== IMAGE OPTIMIZER PAGE ===== */
+  .back-link{ font-family:var(--mono); font-size:12.5px; letter-spacing:.05em; color:var(--text-muted); display:inline-block; margin-bottom:28px; transition:color .15s; }
+  .back-link:hover{ color:var(--cyan); }
+  .io-badge{ display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; color:var(--text-muted); border:1px solid var(--border); border-radius:999px; padding:6px 14px; }
+  .io-badge .dot{ width:7px; height:7px; border-radius:50%; background:#95c56b; box-shadow:0 0 8px #95c56b; }
+  .io-hero{ display:grid; grid-template-columns:1.02fr .98fr; gap:56px; align-items:center; }
+  @media(max-width:960px){ .io-hero{ grid-template-columns:1fr; gap:44px; } }
+  .io-h1{ font-size:52px; line-height:1.08; margin:18px 0 22px; max-width:520px; font-weight:500; }
+  @media(max-width:560px){ .io-h1{ font-size:38px; } }
+  .io-metrics{ display:flex; gap:34px; margin-top:40px; flex-wrap:wrap; }
+  .io-metrics .m .n{ font-family:var(--serif); font-size:26px; color:var(--text); }
+  .io-metrics .m .l{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint); margin-top:4px; }
+
+  .ba{ position:relative; border-radius:18px; overflow:hidden; border:1px solid var(--border); aspect-ratio:4/3; user-select:none; background:#0b1120; box-shadow:0 30px 80px -30px rgba(0,0,0,.8); }
+  .ba-layer{ position:absolute; inset:0; }
+  .ba-scene{ width:100%; height:100%; }
+  .ba-after{ clip-path:inset(0 0 0 50%); }
+  .ba-tag{ position:absolute; top:14px; font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; padding:5px 10px; border-radius:6px; backdrop-filter:blur(6px); }
+  .ba-tag.before{ left:14px; background:rgba(20,26,44,.7); color:#ff9d9d; border:1px solid rgba(255,120,120,.3); }
+  .ba-tag.after{ right:14px; background:rgba(20,26,44,.7); color:var(--mint); border:1px solid rgba(127,240,194,.3); }
+  .ba-size{ position:absolute; bottom:14px; font-family:var(--mono); font-size:13px; padding:6px 12px; border-radius:8px; background:rgba(8,12,22,.78); border:1px solid var(--border); }
+  .ba-size.before{ left:14px; color:#ff9d9d; } .ba-size.after{ right:14px; color:var(--mint); }
+  .ba-divider{ position:absolute; top:0; bottom:0; left:50%; width:2px; background:linear-gradient(#8fe3f2,#7ff0c2); transform:translateX(-1px); }
+  .ba-handle{ position:absolute; top:50%; left:50%; width:44px; height:44px; transform:translate(-50%,-50%); border-radius:50%; background:linear-gradient(105deg,#8fe3f2,#7ff0c2); display:flex; align-items:center; justify-content:center; box-shadow:0 0 24px rgba(127,224,210,.5); cursor:ew-resize; }
+  .ba-handle svg{ width:20px; height:20px; color:#06131a; }
+  .ba-range{ position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:ew-resize; margin:0; }
+  .scene-blur{ filter:blur(1.3px) saturate(.8); }
+
+  .io-feat-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  @media(max-width:900px){ .io-feat-grid{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:620px){ .io-feat-grid{ grid-template-columns:1fr; } }
+  .io-feat{ padding:32px; display:flex; flex-direction:column; gap:14px; transition:border-color .2s,transform .2s; }
+  .io-feat:hover{ border-color:rgba(134,217,240,.4); transform:translateY(-3px); }
+  .io-feat .ic{ width:44px; height:44px; border-radius:11px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; background:rgba(134,217,240,.05); }
+  .io-feat .ic svg{ width:22px; height:22px; color:var(--cyan); }
+  .io-feat h3{ font-size:19px; } .io-feat p{ color:var(--text-muted); font-size:14px; line-height:1.65; }
+  .io-feat .tag{ font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--mint); border:1px solid rgba(127,240,194,.3); border-radius:999px; padding:3px 9px; align-self:flex-start; }
+
+  .io-flow{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:20px; overflow:hidden; }
+  @media(max-width:820px){ .io-flow{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:480px){ .io-flow{ grid-template-columns:1fr; } }
+  .io-flow .step{ background:var(--bg-2); padding:32px 28px; }
+  .io-flow .num{ font-family:var(--mono); font-size:12px; color:var(--cyan); margin-bottom:16px; }
+  .io-flow h3{ font-size:18px; margin-bottom:10px; } .io-flow p{ color:var(--text-muted); font-size:13.5px; line-height:1.6; }
+
+  .io-crop-wrap{ display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:center; }
+  @media(max-width:860px){ .io-crop-wrap{ grid-template-columns:1fr; gap:36px; } }
+  .ratio-btns{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; }
+  .ratio-btns button{ font-family:var(--mono); font-size:13px; padding:9px 16px; border-radius:10px; border:1px solid var(--border); background:transparent; color:var(--text-muted); transition:.15s; }
+  .ratio-btns button:hover{ border-color:var(--cyan); color:var(--text); }
+  .ratio-btns button.active{ background:linear-gradient(105deg,#8fe3f2,#7ff0c2); color:#06131a; border-color:transparent; font-weight:500; }
+  .crop-stage{ aspect-ratio:1/1; border:1px solid var(--border); border-radius:18px; background:radial-gradient(circle at 50% 40%,rgba(134,217,240,.10),transparent 60%),#0a1020; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+  .crop-frame{ border:2px solid var(--cyan); box-shadow:0 0 40px rgba(134,217,240,.25),inset 0 0 40px rgba(134,217,240,.05); border-radius:6px; transition:width .4s cubic-bezier(.4,0,.2,1),height .4s cubic-bezier(.4,0,.2,1); display:flex; align-items:center; justify-content:center; background:rgba(134,217,240,.03); position:relative; }
+  .crop-frame::before,.crop-frame::after{ content:''; position:absolute; width:14px; height:14px; border:2px solid var(--mint); }
+  .crop-frame::before{ top:-2px; left:-2px; border-right:none; border-bottom:none; }
+  .crop-frame::after{ bottom:-2px; right:-2px; border-left:none; border-top:none; }
+  .crop-frame span{ font-family:var(--mono); font-size:14px; color:var(--cyan); }
+
+  .io-ai-card{ padding:0; overflow:hidden; display:grid; grid-template-columns:1fr 1fr; }
+  @media(max-width:820px){ .io-ai-card{ grid-template-columns:1fr; } }
+  .io-ai-visual{ background:radial-gradient(circle at 40% 30%,rgba(134,217,240,.12),transparent 60%),#0a1020; padding:40px; display:flex; align-items:center; justify-content:center; border-right:1px solid var(--border); }
+  @media(max-width:820px){ .io-ai-visual{ border-right:none; border-bottom:1px solid var(--border); } }
+  .mockimg{ width:100%; max-width:280px; aspect-ratio:1/1; border-radius:14px; border:1px solid var(--border); background:linear-gradient(135deg,#12203a,#0c1424); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+  .mockimg .prod{ width:60%; height:60%; border-radius:12px; background:linear-gradient(160deg,#2a4a6a,#16273c); box-shadow:0 20px 40px -12px rgba(0,0,0,.6); }
+  .io-ai-content{ padding:40px; }
+  .io-ai-row{ margin-top:22px; } .io-ai-row:first-child{ margin-top:0; }
+  .io-ai-row .lbl{ font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint); margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+  .io-ai-row .lbl .spark{ color:var(--mint); }
+  .ai-out{ font-family:var(--mono); font-size:13.5px; color:var(--text); background:rgba(134,217,240,.05); border:1px solid var(--border); border-radius:10px; padding:12px 14px; min-height:44px; }
+  .ai-out .cursor{ display:inline-block; width:7px; height:15px; background:var(--cyan); vertical-align:middle; animation:blink 1s steps(2) infinite; }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .io-tools-strip{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+  .tool-chip{ display:inline-flex; align-items:center; gap:9px; font-size:13.5px; color:var(--text-muted); border:1px solid var(--border); border-radius:999px; padding:10px 18px; background:var(--surface); transition:.15s; }
+  .tool-chip:hover{ border-color:var(--cyan); color:var(--text); }
+  .tool-chip svg{ width:15px; height:15px; color:var(--cyan); }
+
+  /* ===== APPS PAGE ===== */
+  .app-status{ display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; padding:5px 12px; border-radius:999px; }
+  .app-status.live{ color:#06131a; background:var(--mint); font-weight:600; }
+  .app-status.live .dot{ width:6px; height:6px; border-radius:50%; background:#06131a; }
+  .app-status.soon{ color:var(--text-faint); border:1px solid var(--border); }
+
+  .app-feature{ display:grid; grid-template-columns:1.1fr .9fr; gap:0; margin-top:44px; overflow:hidden; padding:0; transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+  .app-feature:hover{ border-color:rgba(134,217,240,.45); transform:translateY(-3px); box-shadow:0 30px 70px -30px rgba(0,0,0,.75); }
+  @media(max-width:860px){ .app-feature{ grid-template-columns:1fr; } }
+  .app-feature-body{ padding:44px; }
+  .app-icon-lg{ width:56px; height:56px; border-radius:14px; border:1px solid var(--border); background:rgba(134,217,240,.05); display:flex; align-items:center; justify-content:center; margin:20px 0 18px; }
+  .app-icon-lg svg{ width:28px; height:28px; color:var(--cyan); }
+  .app-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:26px; }
+  .app-tags span{ font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); border:1px solid var(--border); border-radius:999px; padding:5px 11px; }
+  .app-open{ display:inline-flex; align-items:center; gap:8px; font-size:14.5px; font-weight:600; color:var(--cyan); }
+  .app-open svg{ width:13px; height:13px; transition:transform .2s ease; }
+  .app-feature:hover .app-open svg{ transform:translateX(4px); }
+  .app-feature-visual{ background:radial-gradient(circle at 60% 40%,rgba(134,217,240,.12),transparent 62%),#0a1020; border-left:1px solid var(--border); display:flex; align-items:center; justify-content:center; padding:44px; }
+  @media(max-width:860px){ .app-feature-visual{ border-left:none; border-top:1px solid var(--border); } }
+
+  .mini-ba{ position:relative; width:100%; max-width:320px; aspect-ratio:4/3; border-radius:14px; overflow:hidden; border:1px solid var(--border); }
+  .mini-ba-before{ position:absolute; inset:0; background:linear-gradient(135deg,#22344c,#0e1a2c); filter:blur(1px) saturate(.75); }
+  .mini-ba-after{ position:absolute; inset:0; clip-path:inset(0 0 0 50%); background:linear-gradient(135deg,#2e5a78,#14314a); }
+  .mini-ba-after::after{ content:''; position:absolute; left:50%; top:50%; width:44%; height:44%; transform:translate(-25%,-50%); border-radius:10px; background:radial-gradient(circle at 40% 35%,rgba(127,240,194,.6),rgba(134,217,240,.25)); }
+  .mini-ba-line{ position:absolute; top:0; bottom:0; left:50%; width:2px; background:linear-gradient(#8fe3f2,#7ff0c2); box-shadow:0 0 12px rgba(127,224,210,.6); }
+  .mini-ba-tag{ position:absolute; bottom:12px; font-family:var(--mono); font-size:11px; padding:4px 9px; border-radius:6px; background:rgba(8,12,22,.8); border:1px solid var(--border); }
+  .mini-ba-tag.t-before{ left:12px; color:#ff9d9d; }
+  .mini-ba-tag.t-after{ right:12px; color:var(--mint); }
+
+  .upcoming-head{ max-width:660px; margin:88px 0 36px; }
+  .upcoming-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  @media(max-width:860px){ .upcoming-grid{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:560px){ .upcoming-grid{ grid-template-columns:1fr; } }
+  .up-card{ padding:30px; position:relative; display:flex; flex-direction:column; gap:14px; min-height:220px; transition:border-color .2s ease; }
+  .up-card:hover{ border-color:rgba(148,178,225,.32); }
+  .up-card .app-status{ position:absolute; top:24px; right:24px; }
+  .up-icon{ width:46px; height:46px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,.02); display:flex; align-items:center; justify-content:center; }
+  .up-icon svg{ width:23px; height:23px; color:var(--cyan); }
+  .up-card h3{ font-size:19px; }
+  .up-card p{ color:var(--text-muted); font-size:14px; line-height:1.6; flex-grow:1; }
+  .up-card .eta{ font-family:var(--mono); font-size:11px; letter-spacing:.05em; color:var(--text-faint); border-top:1px solid var(--border-soft); padding-top:14px; }
 </style>
 </head>
 <body>
@@ -474,32 +598,47 @@
 
 <!-- ========== APPS ========== -->
 <div class="route" data-route="/apps">
-  <section style="padding-top:72px;">
+  <section style="padding-top:72px; padding-bottom:56px;">
     <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">The portfolio</p>
-        <h2>Five systems, one gravity.</h2>
-        <p class="lede" style="margin-top:16px;">A precision-engineered suite of ecommerce tools, each solving one critical piece of the digital storefront — built to operate as a single system when you need them to.</p>
+      <div class="section-head" style="max-width:720px;">
+        <p class="eyebrow">The one.GLOBE app suite</p>
+        <h2>Powerful Shopify apps, <em>one platform</em>.</h2>
+        <p class="lede" style="margin-top:16px;">A growing family of apps that make your storefront faster, cleaner, and easier to run — all built on the same engine, all under one login. Start with Image Optimizer today; more arrive every month.</p>
       </div>
 
-      <div class="panel primary-card">
-        <div>
-          <span class="tag-pill">Core Platform</span>
-          <h3 style="font-size:28px;">StoreOS</h3>
-          <p class="lede">The all-in-one operating system for ecommerce businesses. StoreOS unifies inventory, orders, fulfillment status, and analytics into a single command layer — the shared nervous system every other tool in the stack plugs into.</p>
-          <a href="#/contact" class="btn btn-outline">View system <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg></a>
+      <!-- Live app: featured -->
+      <a href="#/image-optimizer" class="panel app-feature">
+        <div class="app-feature-body">
+          <div class="app-status live"><span class="dot"></span>Live now</div>
+          <div class="app-icon-lg">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 15l4-4 4 4 3-3 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.6" fill="currentColor"/></svg>
+          </div>
+          <h3 style="font-size:30px;">Image Optimizer</h3>
+          <p class="lede" style="margin:14px 0 22px;">Compress product photos from megabytes to kilobytes, auto-convert to WebP, crop to any ratio, and let AI write your alt text and filenames — right inside your Shopify catalog.</p>
+          <div class="app-tags">
+            <span>Compression</span><span>WebP</span><span>AI alt text</span><span>Crop &amp; ratios</span><span>Editor</span>
+          </div>
+          <span class="app-open">Open app <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg></span>
         </div>
-        <div class="mock-panel">
-          <div class="mock-bar"></div>
-          <div class="mock-rule"></div>
-          <div class="mock-tiles"><div></div><div></div><div></div></div>
-          <svg class="mock-chart" viewBox="0 0 220 70" fill="none">
-            <polyline points="0,50 35,30 70,42 105,18 140,30 175,10 220,20" stroke="#86d9f0" stroke-width="2" fill="none"/>
-          </svg>
+        <div class="app-feature-visual">
+          <div class="mini-ba">
+            <div class="mini-ba-before"></div>
+            <div class="mini-ba-after"></div>
+            <div class="mini-ba-line"></div>
+            <span class="mini-ba-tag t-before">18.4 MB</span>
+            <span class="mini-ba-tag t-after">212 KB</span>
+          </div>
         </div>
+      </a>
+
+      <!-- Upcoming apps -->
+      <div class="upcoming-head">
+        <p class="eyebrow">On the roadmap</p>
+        <h3 style="font-size:24px;">Coming soon to the suite</h3>
+        <p class="lede" style="margin-top:12px;">The apps we're building next. Install Image Optimizer now and these snap in beside it — same dashboard, same login.</p>
       </div>
 
-      <div class="card-grid" id="appsSystems"></div>
+      <div class="upcoming-grid" id="upcomingApps"></div>
     </div>
   </section>
 
@@ -507,10 +646,10 @@
     <div class="wrap">
       <div class="panel cta-band">
         <div>
-          <h2 style="font-size:26px;">Not sure which system fits first?</h2>
-          <p>Most teams start with StoreOS and grow outward. We'll help you map the right sequence.</p>
+          <h2 style="font-size:26px;">Want early access to what's next?</h2>
+          <p>Join the list and be first to try Blog Generator, SEO Generator, and every app after them.</p>
         </div>
-        <a href="#/contact" class="btn btn-grad">Talk to Our Team <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg></a>
+        <a href="#/contact" class="btn btn-grad">Get Early Access <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg></a>
       </div>
     </div>
   </section>
@@ -703,6 +842,174 @@
   </section>
 </div>
 
+<!-- ========== IMAGE OPTIMIZER (app detail page) ========== -->
+<div class="route" data-route="/image-optimizer">
+
+  <section style="padding-top:64px; padding-bottom:56px;">
+    <div class="wrap">
+      <a href="#/apps" class="back-link">&larr; Back to Apps</a>
+      <div class="io-hero">
+        <div>
+          <span class="io-badge"><span class="dot"></span>Shopify-native · by one.GLOBE</span>
+          <p class="eyebrow" style="margin-top:16px;">Image Optimizer</p>
+          <h1 class="io-h1">Ship images that load in a <em>blink</em>, not a wait.</h1>
+          <p class="lede">Compress heavy product photos from megabytes down to kilobytes, auto-convert anything to WebP, and let AI write the alt text and filenames — all without leaving your Shopify catalog.</p>
+          <div class="hero-actions" style="margin-top:32px;">
+            <a href="#/contact" class="btn btn-grad">Add to Shopify <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg></a>
+            <a href="#io-demo" class="btn btn-outline">See it in action</a>
+          </div>
+          <div class="io-metrics">
+            <div class="m"><div class="n">Up to 90%</div><div class="l">Smaller file size</div></div>
+            <div class="m"><div class="n">WebP</div><div class="l">Auto conversion</div></div>
+            <div class="m"><div class="n">1-click</div><div class="l">Bulk collections</div></div>
+          </div>
+        </div>
+
+        <div id="io-demo">
+          <div class="ba" id="ba">
+            <div class="ba-layer">
+              <svg class="ba-scene scene-blur" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                  <linearGradient id="bgA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1a2c44"/><stop offset="1" stop-color="#0c1626"/></linearGradient>
+                  <linearGradient id="prodA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a6a8a"/><stop offset="1" stop-color="#1c3450"/></linearGradient>
+                </defs>
+                <rect width="400" height="300" fill="url(#bgA)"/>
+                <rect x="130" y="70" width="140" height="160" rx="14" fill="url(#prodA)"/>
+                <circle cx="200" cy="130" r="30" fill="#5a8ab0" opacity=".6"/>
+                <rect x="150" y="180" width="100" height="10" rx="5" fill="#4a7090" opacity=".5"/>
+              </svg>
+            </div>
+            <div class="ba-layer ba-after" id="baAfter">
+              <svg class="ba-scene" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+                <rect width="400" height="300" fill="url(#bgA)"/>
+                <rect x="130" y="70" width="140" height="160" rx="14" fill="url(#prodA)"/>
+                <circle cx="200" cy="130" r="30" fill="#7fd0f0" opacity=".9"/>
+                <rect x="150" y="180" width="100" height="10" rx="5" fill="#7ff0c2" opacity=".8"/>
+              </svg>
+            </div>
+            <span class="ba-tag before">Before · JPG</span>
+            <span class="ba-tag after">After · WebP</span>
+            <span class="ba-size before">18.4 MB</span>
+            <span class="ba-size after">212 KB</span>
+            <div class="ba-divider" id="baDiv"></div>
+            <div class="ba-handle" id="baHandle"><svg viewBox="0 0 24 24" fill="none"><path d="M8 7l-4 5 4 5M16 7l4 5-4 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <input type="range" min="0" max="100" value="50" class="ba-range" id="baRange" aria-label="Compare before and after">
+          </div>
+          <p style="text-align:center;color:var(--text-faint);font-family:var(--mono);font-size:12px;margin-top:14px;">Drag to compare · same image, 98% lighter</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Everything in one place</p>
+        <h2>One app for every image job your store has.</h2>
+        <p class="lede" style="margin-top:16px;">From raw compression to AI copy, the whole pipeline lives inside Shopify — no exports, no third-party editors, no broken links.</p>
+      </div>
+      <div class="io-feat-grid" id="ioFeatGrid"></div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How it works</p>
+        <h2>Connect once. Optimize forever.</h2>
+      </div>
+      <div class="io-flow">
+        <div class="step"><div class="num">01</div><h3>Connect Shopify</h3><p>Install in a click and grant access. The app reads your collections and products directly.</p></div>
+        <div class="step"><div class="num">02</div><h3>Pick your targets</h3><p>Choose a whole collection, specific products, or individual product images to work on.</p></div>
+        <div class="step"><div class="num">03</div><h3>Optimize &amp; edit</h3><p>Compress, convert to WebP, crop to any ratio, annotate, or remove text — in bulk or one by one.</p></div>
+        <div class="step"><div class="num">04</div><h3>Publish back</h3><p>Optimized images, AI alt text and clean filenames sync straight back to your live store.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="wrap">
+      <div class="io-crop-wrap">
+        <div>
+          <p class="eyebrow">Resize &amp; reframe</p>
+          <h2>Any ratio your theme needs.</h2>
+          <p class="lede" style="margin-top:16px;">Product grids want squares, hero banners want widescreen, stories want vertical. Snap any image to the exact aspect ratio your store uses — pick a preset and see it reframe live.</p>
+          <div class="ratio-btns" id="ratioBtns">
+            <button data-r="1/1" class="active">1 : 1</button>
+            <button data-r="4/3">4 : 3</button>
+            <button data-r="16/9">16 : 9</button>
+            <button data-r="9/16">9 : 16</button>
+            <button data-r="3/4">3 : 4</button>
+          </div>
+        </div>
+        <div class="crop-stage">
+          <div class="crop-frame" id="cropFrame" style="width:260px;height:260px;"><span id="cropLabel">1 : 1</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Built-in AI</p>
+        <h2>Alt text and filenames, <em>written for you</em>.</h2>
+        <p class="lede" style="margin-top:16px;">Every image gets accessible, SEO-ready alt text and a clean, descriptive filename — generated automatically from what's actually in the picture.</p>
+      </div>
+      <div class="panel io-ai-card" id="ioAi">
+        <div class="io-ai-visual">
+          <div class="mockimg"><div class="prod"></div></div>
+        </div>
+        <div class="io-ai-content">
+          <div class="io-ai-row">
+            <div class="lbl"><span class="spark">✦</span> AI-generated alt text</div>
+            <div class="ai-out" id="altOut"></div>
+          </div>
+          <div class="io-ai-row">
+            <div class="lbl"><span class="spark">✦</span> AI-generated filename</div>
+            <div class="ai-out" id="nameOut"></div>
+          </div>
+          <div class="io-ai-row">
+            <div class="lbl"><span class="spark">✦</span> Why it matters</div>
+            <p style="color:var(--text-muted);font-size:14px;line-height:1.65;">Better alt text lifts accessibility and image SEO; clean filenames help Google index your products. Both used to be manual busywork — now they ship with every optimize.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="wrap">
+      <div class="section-head center">
+        <p class="eyebrow" style="justify-content:center;">A full editor, in-app</p>
+        <h2>More than compression.</h2>
+        <p class="lede" style="margin:16px auto 0;">Draw and annotate, isolate a product, wipe out unwanted text or watermarks, and fine-tune before you publish.</p>
+      </div>
+      <div class="io-tools-strip">
+        <span class="tool-chip"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20l4-1 10-10a2 2 0 00-3-3L5 16l-1 4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Draw &amp; annotate</span>
+        <span class="tool-chip"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M9 13l2 2 4-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Select a product</span>
+        <span class="tool-chip"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M6 18L18 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Remove text &amp; letters</span>
+        <span class="tool-chip"><svg viewBox="0 0 24 24" fill="none"><path d="M3 15l4-4 4 4 3-3 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/></svg>Compress to KB</span>
+        <span class="tool-chip"><svg viewBox="0 0 24 24" fill="none"><path d="M4 8V4h4M20 8V4h-4M4 16v4h4M20 16v4h-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Crop &amp; ratios</span>
+        <span class="tool-chip"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Convert to WebP</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="wrap">
+      <div class="panel cta-band">
+        <div>
+          <h2>Lighter images. Higher rankings. Faster stores.</h2>
+          <p>Install Image Optimizer and put your whole catalog on a diet in an afternoon.</p>
+        </div>
+        <a href="#/contact" class="btn btn-grad">Add to Shopify <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
 </main>
 
 <footer>
@@ -753,15 +1060,16 @@
 
 <script>
   const systems = [
-    { tag:"Conversion", name:"CartFlow", desc:"An intelligent checkout engine that reads hesitation before it becomes abandonment — one-click payments, adaptive shipping, and smart recovery shorten the distance between intent and purchase.", meta:"Checkout velocity" },
-    { tag:"AI Tools", name:"CatalogAI", desc:"Product data that organizes and describes itself. CatalogAI tags, structures, and enriches a catalog so search and merchandising stay effortless at any scale.", meta:"Catalog intelligence" },
-    { tag:"Logistics", name:"ShipSync", desc:"Real-time coordination across every carrier and border a business sells through, turning fulfillment from a bottleneck into a competitive edge.", meta:"Global fulfillment" },
-    { tag:"Analytics", name:"InsightPulse", desc:"Decision-ready intelligence on how a business actually behaves, replacing dashboards nobody trusts with numbers everybody acts on.", meta:"Decisive growth" },
+    { tag:"Optimization", name:"Image Optimizer", desc:"Compress heavy product photos from megabytes to kilobytes, auto-convert anything to WebP, crop to any ratio, and let AI write the alt text and filenames — all directly inside your Shopify catalog.", meta:"Faster storefronts", link:"#/image-optimizer" },
+    { tag:"Conversion", name:"CartFlow", desc:"An intelligent checkout engine that reads hesitation before it becomes abandonment — one-click payments, adaptive shipping, and smart recovery shorten the distance between intent and purchase.", meta:"Checkout velocity", link:"" },
+    { tag:"AI Tools", name:"CatalogAI", desc:"Product data that organizes and describes itself. CatalogAI tags, structures, and enriches a catalog so search and merchandising stay effortless at any scale.", meta:"Catalog intelligence", link:"" },
+    { tag:"Logistics", name:"ShipSync", desc:"Real-time coordination across every carrier and border a business sells through, turning fulfillment from a bottleneck into a competitive edge.", meta:"Global fulfillment", link:"" },
+    { tag:"Analytics", name:"InsightPulse", desc:"Decision-ready intelligence on how a business actually behaves, replacing dashboards nobody trusts with numbers everybody acts on.", meta:"Decisive growth", link:"" },
   ];
 
   function renderSystems(el){
-    el.innerHTML = systems.map(s => `
-      <div class="panel mini-card">
+    el.innerHTML = systems.map(s => {
+      const inner = `
         <span class="tag-pill">${s.tag}</span>
         <h3>${s.name}</h3>
         <p class="desc">${s.desc}</p>
@@ -769,11 +1077,35 @@
           <div class="m-label">Engineered for</div>
           <div class="m-value">${s.meta}</div>
         </div>
-      </div>
-    `).join('');
+        ${s.link ? `<div class="open-app">Open app <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg></div>` : ``}
+      `;
+      return s.link
+        ? `<a href="${s.link}" class="panel mini-card clickable">${inner}</a>`
+        : `<div class="panel mini-card">${inner}</div>`;
+    }).join('');
   }
   renderSystems(document.getElementById('homeSystems'));
-  renderSystems(document.getElementById('appsSystems'));
+
+  // ---- upcoming apps (Apps page roadmap) ----
+  const upcoming = [
+    { name:"Blog Generator", eta:"Coming Q3 2026", icon:'<path d="M4 5h16M4 12h16M4 19h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>', desc:"AI-written blog posts that pull straight from your catalog and publish to Shopify — SEO-ready out of the box." },
+    { name:"SEO Generator", eta:"Coming Q3 2026", icon:'<circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>', desc:"Auto-build meta titles, descriptions, schema, and keyword coverage tuned for every product page." },
+    { name:"Review Booster", eta:"Coming Q4 2026", icon:'<path d="M12 3l2.6 6.5L21 10l-5 4.2L17.5 21 12 17.3 6.5 21 8 14.2 3 10l6.4-.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>', desc:"Collect, showcase, and reply to product reviews that build trust and lift conversion." },
+    { name:"Bundle Builder", eta:"Coming Q4 2026", icon:'<rect x="3" y="8" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 8V6a4 4 0 018 0v2" stroke="currentColor" stroke-width="1.6"/>', desc:"Create smart product bundles and volume offers that raise average order value automatically." },
+    { name:"Speed Booster", eta:"Coming 2027", icon:'<path d="M13 2L4.5 13H11l-1 9 8.5-11H12l1-9z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>', desc:"Lazy-loading, script cleanup, and caching that squeeze every millisecond out of your theme." },
+    { name:"More on the way", eta:"Always shipping", icon:'<path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>', desc:"One login, one dashboard, one bill — the suite keeps growing. Tell us what you need next." },
+  ];
+  const upEl = document.getElementById('upcomingApps');
+  if(upEl){
+    upEl.innerHTML = upcoming.map(a=>`
+      <div class="panel up-card">
+        <span class="app-status soon">Soon</span>
+        <div class="up-icon"><svg viewBox="0 0 24 24" fill="none">${a.icon}</svg></div>
+        <h3>${a.name}</h3>
+        <p>${a.desc}</p>
+        <div class="eta">${a.eta}</div>
+      </div>`).join('');
+  }
 
   const insights = [
     { cat:"Platform Strategy", title:"The storefront is becoming an operating system", excerpt:"Ecommerce used to mean a cart bolted onto a website. The businesses pulling ahead now treat their storefront as a full operating layer, running inventory, fulfillment, and intelligence as one connected system.", meta:"one.GLOBE Insights · 7 min read" },
@@ -797,7 +1129,7 @@
   const navLinks = document.querySelectorAll('[data-route-link]');
   function applyRoute(){
     let path = location.hash.replace(/^#/, '') || '/';
-    if(!['/','/apps','/about','/insights','/contact'].includes(path)) path = '/';
+    if(!['/','/apps','/about','/insights','/contact','/image-optimizer'].includes(path)) path = '/';
     routes.forEach(r => r.classList.toggle('active', r.dataset.route === path));
     navLinks.forEach(a => a.classList.toggle('active', a.dataset.routeLink === path));
     window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
@@ -817,6 +1149,73 @@
     document.getElementById('formStatus').classList.add('show');
     this.reset();
   });
+
+  // ===== IMAGE OPTIMIZER PAGE =====
+  // feature cards
+  const ioFeats = [
+    {tag:"Core", icon:'<path d="M3 15l4-4 4 4 3-3 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/>', title:"MB &rarr; KB compression", desc:"Drop a 20&nbsp;MB photo to a few hundred KB with no visible quality loss. Your pages get lighter, your Core Web Vitals get happier."},
+    {tag:"Core", icon:'<path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>', title:"Auto WebP conversion", desc:"JPG, PNG, HEIC — whatever you upload gets converted to modern WebP automatically, with fallbacks handled for you."},
+    {tag:"Shopify", icon:'<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>', title:"Direct Shopify sync", desc:"Connect your store and work on real collections and products. Optimized images publish straight back — links never break."},
+    {tag:"AI", icon:'<path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>', title:"AI alt text generator", desc:"Accessible, keyword-aware alt text written from the image itself — great for SEO and shoppers using screen readers."},
+    {tag:"AI", icon:'<path d="M4 7h16M4 12h10M4 17h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>', title:"Smart filename generator", desc:"Turn IMG_4821.jpg into blue-linen-throw-pillow.webp automatically, so Google can actually read your product images."},
+    {tag:"Editor", icon:'<path d="M4 8V4h4M20 8V4h-4M4 16v4h4M20 16v4h-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>', title:"Crop to any ratio", desc:"1:1, 4:3, 16:9, 9:16 and custom — snap images to the exact shape your theme expects in one tap."},
+    {tag:"Editor", icon:'<path d="M4 20l4-1 10-10a2 2 0 00-3-3L5 16l-1 4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>', title:"Draw &amp; annotate", desc:"Mark up images, highlight a detail, or point a customer's eye exactly where you want it — right on the canvas."},
+    {tag:"Editor", icon:'<path d="M6 6l12 12M6 18L18 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>', title:"Remove text &amp; letters", desc:"Wipe out old watermarks, sale stickers, or leftover text so your imagery stays clean and on-brand."},
+    {tag:"Editor", icon:'<rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M9 13l2 2 4-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>', title:"Select the product", desc:"Isolate the product from its background to recompose, re-shoot the framing, or drop it onto a clean canvas."},
+  ];
+  const ioGrid = document.getElementById('ioFeatGrid');
+  if(ioGrid){
+    ioGrid.innerHTML = ioFeats.map(f=>`
+      <div class="panel io-feat">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none">${f.icon}</svg></div>
+        <span class="tag">${f.tag}</span>
+        <h3>${f.title}</h3>
+        <p>${f.desc}</p>
+      </div>`).join('');
+  }
+
+  // before/after slider
+  const baRange=document.getElementById('baRange');
+  if(baRange){
+    const baDiv=document.getElementById('baDiv'), baHandle=document.getElementById('baHandle'), baAfter=document.getElementById('baAfter');
+    const setBA=v=>{ baDiv.style.left=v+'%'; baHandle.style.left=v+'%'; baAfter.style.clipPath=`inset(0 0 0 ${v}%)`; };
+    baRange.addEventListener('input',e=>setBA(e.target.value));
+    setBA(50);
+  }
+
+  // ratio crop demo
+  const ratioBtns=document.getElementById('ratioBtns');
+  if(ratioBtns){
+    const frame=document.getElementById('cropFrame'), label=document.getElementById('cropLabel'), MAX=300;
+    ratioBtns.addEventListener('click',e=>{
+      const b=e.target.closest('button'); if(!b)return;
+      ratioBtns.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      const [w,h]=b.dataset.r.split('/').map(Number);
+      let fw,fh; if(w>=h){ fw=MAX; fh=MAX*h/w; } else { fh=MAX; fw=MAX*w/h; }
+      frame.style.width=fw+'px'; frame.style.height=fh+'px'; label.textContent=b.textContent;
+    });
+  }
+
+  // AI typing (plays when the IO AI card scrolls into view)
+  const ioAi=document.getElementById('ioAi');
+  if(ioAi){
+    let aiPlayed=false;
+    const typeInto=(el,text,speed,done)=>{
+      let i=0; el.innerHTML='<span class="cursor"></span>';
+      const t=setInterval(()=>{ i++; el.innerHTML=text.slice(0,i)+'<span class="cursor"></span>';
+        if(i>=text.length){ clearInterval(t); el.innerHTML=text; done&&done(); } },speed);
+    };
+    const playAI=()=>{
+      if(aiPlayed)return; aiPlayed=true;
+      typeInto(document.getElementById('altOut'),'"Blue linen throw pillow on a neutral sofa, front view"',26,()=>{
+        setTimeout(()=>typeInto(document.getElementById('nameOut'),'blue-linen-throw-pillow-front.webp',30),300);
+      });
+    };
+    new IntersectionObserver((entries,obs)=>{
+      entries.forEach(en=>{ if(en.isIntersecting){ playAI(); } });
+    },{threshold:.3}).observe(ioAi);
+  }
 </script>
 
 </body>
