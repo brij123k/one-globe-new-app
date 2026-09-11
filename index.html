@@ -394,10 +394,11 @@
   .app-feature-visual{ background:radial-gradient(circle at 60% 40%,rgba(134,217,240,.12),transparent 62%),#0a1020; border-left:1px solid var(--border); display:flex; align-items:center; justify-content:center; padding:44px; }
   @media(max-width:860px){ .app-feature-visual{ border-left:none; border-top:1px solid var(--border); } }
 
-  .mini-ba{ position:relative; width:100%; max-width:320px; aspect-ratio:4/3; border-radius:14px; overflow:hidden; border:1px solid var(--border); }
-  .mini-ba-before{ position:absolute; inset:0; background:linear-gradient(135deg,#22344c,#0e1a2c); filter:blur(1px) saturate(.75); }
-  .mini-ba-after{ position:absolute; inset:0; clip-path:inset(0 0 0 50%); background:linear-gradient(135deg,#2e5a78,#14314a); }
-  .mini-ba-after::after{ content:''; position:absolute; left:50%; top:50%; width:44%; height:44%; transform:translate(-25%,-50%); border-radius:10px; background:radial-gradient(circle at 40% 35%,rgba(127,240,194,.6),rgba(134,217,240,.25)); }
+  .mini-ba{ position:relative; width:100%; max-width:320px; aspect-ratio:4/3; border-radius:14px; overflow:hidden; border:1px solid var(--border); background:#0a0e1c; }
+  .mini-ba-before{ position:absolute; inset:0; }
+  .mini-ba-before img{ width:100%; height:100%; object-fit:cover; filter:blur(1.4px) saturate(.7) brightness(.85); }
+  .mini-ba-after{ position:absolute; inset:0; clip-path:inset(0 0 0 50%); }
+  .mini-ba-after img{ width:100%; height:100%; object-fit:cover; }
   .mini-ba-line{ position:absolute; top:0; bottom:0; left:50%; width:2px; background:linear-gradient(#8fe3f2,#7ff0c2); box-shadow:0 0 12px rgba(127,224,210,.6); }
   .mini-ba-tag{ position:absolute; bottom:12px; font-family:var(--mono); font-size:11px; padding:4px 9px; border-radius:6px; background:rgba(8,12,22,.8); border:1px solid var(--border); }
   .mini-ba-tag.t-before{ left:12px; color:#ff9d9d; }
@@ -728,8 +729,8 @@
         </div>
         <div class="app-feature-visual">
           <div class="mini-ba">
-            <div class="mini-ba-before"></div>
-            <div class="mini-ba-after"></div>
+            <div class="mini-ba-before"><img src="Wall-Clock-Artistic-Wooden-12-Inch.webp" alt="Product before"></div>
+            <div class="mini-ba-after"><img src="Wall-Clock-Artistic-Wooden-12-Inch.webp" alt="Product after"></div>
             <div class="mini-ba-line"></div>
             <span class="mini-ba-tag t-before">18.4 MB</span>
             <span class="mini-ba-tag t-after">212 KB</span>
