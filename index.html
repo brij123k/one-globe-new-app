@@ -450,6 +450,51 @@
   .ft-txt{ font-family:var(--mono); font-size:12px; color:var(--text-muted); }
   .ft-txt.hi{ color:var(--cyan); }
 
+  /* ===== LIVE OPTIMIZER TOOL ===== */
+  .opt-tool{ padding:32px; }
+  .opt-controls{ display:flex; flex-wrap:wrap; gap:24px; align-items:flex-end; padding-bottom:28px; margin-bottom:28px; border-bottom:1px solid var(--border-soft); }
+  .opt-ctrl{ display:flex; flex-direction:column; gap:10px; min-width:180px; }
+  .opt-ctrl label{ font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint); display:flex; justify-content:space-between; gap:10px; }
+  .opt-ctrl label span{ color:var(--cyan); }
+  .seg{ display:inline-flex; border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+  .seg button{ font-family:var(--mono); font-size:12.5px; padding:9px 16px; background:transparent; color:var(--text-muted); border:none; border-right:1px solid var(--border); transition:.15s; }
+  .seg button:last-child{ border-right:none; }
+  .seg button:hover{ color:var(--text); }
+  .seg button.active{ background:linear-gradient(105deg,#8fe3f2,#7ff0c2); color:#06131a; font-weight:600; }
+  .opt-range{ -webkit-appearance:none; appearance:none; width:100%; height:4px; border-radius:2px; background:var(--border); outline:none; }
+  .opt-range::-webkit-slider-thumb{ -webkit-appearance:none; width:16px; height:16px; border-radius:50%; background:linear-gradient(105deg,#8fe3f2,#7ff0c2); cursor:pointer; box-shadow:0 0 10px rgba(127,224,210,.5); }
+  .opt-range::-moz-range-thumb{ width:16px; height:16px; border:none; border-radius:50%; background:#7ff0c2; cursor:pointer; }
+
+  .opt-slots{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media(max-width:680px){ .opt-slots{ grid-template-columns:1fr; } }
+  .opt-slot{ position:relative; }
+  .opt-file{ position:absolute; inset:0; opacity:0; cursor:pointer; z-index:2; width:100%; height:100%; }
+  .opt-file:disabled{ display:none; }
+  .opt-drop{ border:1.5px dashed var(--border); border-radius:14px; padding:44px 20px; display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center; transition:.2s; background:rgba(134,217,240,.02); min-height:210px; justify-content:center; }
+  .opt-drop.drag, .opt-slot:hover .opt-drop{ border-color:var(--cyan); background:rgba(134,217,240,.06); }
+  .opt-drop svg{ width:34px; height:34px; color:var(--cyan); }
+  .opt-drop-txt{ font-family:var(--serif); font-size:17px; color:var(--text); }
+  .opt-drop-sub{ font-size:13px; color:var(--text-faint); }
+
+  .opt-result{ border:1px solid var(--border); border-radius:14px; overflow:hidden; background:#0a0e1c; }
+  .opt-result .thumb{ width:100%; aspect-ratio:16/10; object-fit:cover; display:block; background:#070a15; }
+  .opt-result .meta{ padding:16px 18px; }
+  .opt-result .fname{ font-family:var(--mono); font-size:12px; color:var(--text-muted); word-break:break-all; margin-bottom:12px; }
+  .opt-result .sizes{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .opt-result .sz{ font-family:var(--mono); font-size:12.5px; padding:4px 10px; border-radius:6px; border:1px solid var(--border); }
+  .opt-result .sz.old{ color:#ff9d9d; text-decoration:line-through; opacity:.8; }
+  .opt-result .sz.new{ color:var(--mint); border-color:rgba(127,240,194,.35); }
+  .opt-result .save{ font-family:var(--mono); font-size:12.5px; color:var(--cyan); }
+  .opt-result .row-actions{ display:flex; gap:10px; }
+  .opt-result .dl{ display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:600; color:#06131a; background:linear-gradient(105deg,#8fe3f2,#7ff0c2); padding:9px 16px; border-radius:8px; }
+  .opt-result .dl svg{ width:13px; height:13px; }
+  .opt-result .redo{ font-size:13px; color:var(--text-muted); padding:9px 14px; border:1px solid var(--border); border-radius:8px; background:transparent; }
+  .opt-result .redo:hover{ color:var(--text); border-color:var(--cyan); }
+  .opt-busy{ padding:44px 20px; text-align:center; font-family:var(--mono); font-size:13px; color:var(--cyan); }
+
+  .opt-summary{ margin-top:24px; padding:18px 22px; border:1px solid rgba(127,240,194,.3); background:rgba(127,240,194,.05); border-radius:12px; font-family:var(--mono); font-size:13.5px; color:var(--mint); display:flex; align-items:center; gap:10px; }
+  .opt-summary svg{ width:17px; height:17px; flex-shrink:0; }
+
   /* ===== US VS THEM ===== */
   .vs-wrap{ display:grid; grid-template-columns:1fr auto 1fr; gap:0; align-items:stretch; }
   @media(max-width:820px){ .vs-wrap{ grid-template-columns:1fr; gap:16px; } }
@@ -958,6 +1003,64 @@
     </div>
   </section>
 
+  <!-- LIVE OPTIMIZER TOOL -->
+  <section class="tight" id="io-tool">
+    <div class="wrap">
+      <div class="section-head center">
+        <p class="eyebrow" style="justify-content:center;">Try it now · runs in your browser</p>
+        <h2>Optimize a product — <em>live</em>.</h2>
+        <p class="lede" style="margin:16px auto 0;">Upload up to two product images, choose your settings, and optimize. Everything happens on your device — nothing is uploaded to a server.</p>
+      </div>
+
+      <div class="panel opt-tool">
+        <!-- controls -->
+        <div class="opt-controls">
+          <div class="opt-ctrl">
+            <label>Output format</label>
+            <div class="seg" id="fmtSeg">
+              <button data-v="image/webp" class="active">WebP</button>
+              <button data-v="image/jpeg">JPEG</button>
+              <button data-v="image/png">PNG</button>
+            </div>
+          </div>
+          <div class="opt-ctrl">
+            <label>Quality <span id="qVal">80%</span></label>
+            <input type="range" id="qRange" min="30" max="100" value="80" class="opt-range">
+          </div>
+          <div class="opt-ctrl">
+            <label>Max width <span id="wVal">1600px</span></label>
+            <input type="range" id="wRange" min="400" max="3000" step="100" value="1600" class="opt-range">
+          </div>
+          <button class="btn btn-grad" id="optBtn" style="align-self:flex-end;">Optimize images <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg></button>
+        </div>
+
+        <!-- two upload slots -->
+        <div class="opt-slots" id="optSlots">
+          <div class="opt-slot" data-slot="0">
+            <input type="file" accept="image/*" class="opt-file" id="file0">
+            <div class="opt-drop" id="drop0">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4M8 8l4-4 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <div class="opt-drop-txt">Product image 1</div>
+              <div class="opt-drop-sub">Click or drop an image</div>
+            </div>
+            <div class="opt-result" id="res0" hidden></div>
+          </div>
+          <div class="opt-slot" data-slot="1">
+            <input type="file" accept="image/*" class="opt-file" id="file1">
+            <div class="opt-drop" id="drop1">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4M8 8l4-4 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <div class="opt-drop-txt">Product image 2</div>
+              <div class="opt-drop-sub">Click or drop an image</div>
+            </div>
+            <div class="opt-result" id="res1" hidden></div>
+          </div>
+        </div>
+
+        <div class="opt-summary" id="optSummary" hidden></div>
+      </div>
+    </div>
+  </section>
+
   <section class="tight">
     <div class="wrap">
       <div class="section-head">
@@ -1354,6 +1457,149 @@
   const usEl=document.getElementById('vsUs'), themEl=document.getElementById('vsThem');
   if(usEl) usEl.innerHTML=usList.map(t=>`<li>${CHECK}<span>${t}</span></li>`).join('');
   if(themEl) themEl.innerHTML=themList.map(t=>`<li>${CROSS}<span>${t}</span></li>`).join('');
+
+  // ===== LIVE OPTIMIZER TOOL =====
+  (function(){
+    const tool=document.getElementById('io-tool');
+    if(!tool) return;
+
+    const slots=[0,1].map(i=>({
+      file:null,                       // original File
+      idx:i,
+      input:document.getElementById('file'+i),
+      drop:document.getElementById('drop'+i),
+      res:document.getElementById('res'+i),
+      blob:null,                       // optimized Blob
+      url:null
+    }));
+    let fmt='image/webp', quality=0.8, maxW=1600;
+
+    const fmtExt={'image/webp':'webp','image/jpeg':'jpg','image/png':'png'};
+    const fmtBusy = {};
+
+    function humanSize(bytes){
+      if(bytes<1024) return bytes+' B';
+      if(bytes<1024*1024) return (bytes/1024).toFixed(0)+' KB';
+      return (bytes/1024/1024).toFixed(2)+' MB';
+    }
+
+    // format toggle
+    const fmtSeg=document.getElementById('fmtSeg');
+    fmtSeg.addEventListener('click',e=>{
+      const b=e.target.closest('button'); if(!b)return;
+      fmtSeg.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active'); fmt=b.dataset.v;
+    });
+    // sliders
+    const qRange=document.getElementById('qRange'), qVal=document.getElementById('qVal');
+    qRange.addEventListener('input',()=>{ quality=qRange.value/100; qVal.textContent=qRange.value+'%'; });
+    const wRange=document.getElementById('wRange'), wVal=document.getElementById('wVal');
+    wRange.addEventListener('input',()=>{ maxW=+wRange.value; wVal.textContent=wRange.value+'px'; });
+
+    // file selection + drag/drop per slot
+    slots.forEach(s=>{
+      s.input.addEventListener('change',e=>{ if(e.target.files[0]) loadFile(s,e.target.files[0]); });
+      s.drop.addEventListener('dragover',e=>{ e.preventDefault(); s.drop.classList.add('drag'); });
+      s.drop.addEventListener('dragleave',()=>s.drop.classList.remove('drag'));
+      s.drop.addEventListener('drop',e=>{
+        e.preventDefault(); s.drop.classList.remove('drag');
+        const f=e.dataTransfer.files[0]; if(f && f.type.startsWith('image/')) loadFile(s,f);
+      });
+    });
+
+    function loadFile(s,file){
+      s.file=file;
+      // preview the picked file immediately (not yet optimized)
+      s.drop.querySelector('.opt-drop-txt').textContent=file.name;
+      s.drop.querySelector('.opt-drop-sub').textContent=humanSize(file.size)+' · ready to optimize';
+      s.res.hidden=true; s.blob=null;
+    }
+
+    // core: resize + re-encode via canvas
+    function optimize(s){
+      return new Promise((resolve,reject)=>{
+        if(!s.file){ resolve(null); return; }
+        const img=new Image();
+        const objUrl=URL.createObjectURL(s.file);
+        img.onload=()=>{
+          let w=img.naturalWidth, h=img.naturalHeight;
+          if(w>maxW){ h=Math.round(h*maxW/w); w=maxW; }
+          const canvas=document.createElement('canvas');
+          canvas.width=w; canvas.height=h;
+          const ctx=canvas.getContext('2d');
+          // PNG->JPEG needs a background (JPEG has no alpha)
+          if(fmt==='image/jpeg'){ ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,w,h); }
+          ctx.drawImage(img,0,0,w,h);
+          URL.revokeObjectURL(objUrl);
+          const q = fmt==='image/png' ? undefined : quality;
+          canvas.toBlob(blob=>{
+            if(!blob){ reject(); return; }
+            resolve({blob,w,h});
+          }, fmt, q);
+        };
+        img.onerror=reject;
+        img.src=objUrl;
+      });
+    }
+
+    function baseName(name){ return name.replace(/\.[^.]+$/,''); }
+
+    function showResult(s,out){
+      const ext=fmtExt[fmt];
+      const newName=baseName(s.file.name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'.'+ext;
+      const oldSize=s.file.size, newSize=out.blob.size;
+      const saved=Math.max(0,Math.round((1-newSize/oldSize)*100));
+      if(s.url) URL.revokeObjectURL(s.url);
+      s.url=URL.createObjectURL(out.blob);
+      s.blob=out.blob; s.newName=newName; s.newSize=newSize; s.saved=saved;
+
+      s.res.hidden=false;
+      s.res.innerHTML=`
+        <img class="thumb" src="${s.url}" alt="Optimized ${newName}">
+        <div class="meta">
+          <div class="fname">${newName} · ${out.w}×${out.h}</div>
+          <div class="sizes">
+            <span class="sz old">${humanSize(oldSize)}</span>
+            <span class="sz new">${humanSize(newSize)}</span>
+            <span class="save">−${saved}% smaller</span>
+          </div>
+          <div class="row-actions">
+            <a class="dl" href="${s.url}" download="${newName}"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4.5 7L8 10.5 11.5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Download</a>
+            <button class="redo" data-redo="${s.idx}">Replace</button>
+          </div>
+        </div>`;
+    }
+
+    // "Replace" resets a slot to the drop zone
+    tool.addEventListener('click',e=>{
+      const rb=e.target.closest('.redo'); if(!rb)return;
+      const s=slots[+rb.dataset.redo];
+      s.file=null; s.blob=null; s.res.hidden=true; s.input.value='';
+      s.drop.querySelector('.opt-drop-txt').textContent='Product image '+(s.idx+1);
+      s.drop.querySelector('.opt-drop-sub').textContent='Click or drop an image';
+    });
+
+    // Optimize button
+    const optBtn=document.getElementById('optBtn'), summary=document.getElementById('optSummary');
+    optBtn.addEventListener('click',async()=>{
+      const active=slots.filter(s=>s.file);
+      if(!active.length){ summary.hidden=false; summary.style.color='#ff9d9d'; summary.style.borderColor='rgba(255,120,120,.35)'; summary.style.background='rgba(255,120,120,.06)';
+        summary.innerHTML='Add at least one product image to optimize.'; return; }
+      optBtn.disabled=true; optBtn.style.opacity='.6';
+      let totalOld=0,totalNew=0;
+      for(const s of active){
+        s.res.hidden=false; s.res.innerHTML='<div class="opt-busy">Optimizing…</div>';
+      }
+      for(const s of active){
+        try{ const out=await optimize(s); showResult(s,out); totalOld+=s.file.size; totalNew+=s.newSize; }
+        catch(err){ s.res.innerHTML='<div class="opt-busy" style="color:#ff9d9d">Could not process this image.</div>'; }
+      }
+      optBtn.disabled=false; optBtn.style.opacity='1';
+      const saved=totalOld?Math.round((1-totalNew/totalOld)*100):0;
+      summary.hidden=false; summary.style.color=''; summary.style.borderColor=''; summary.style.background='';
+      summary.innerHTML=`<svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="1.7"/></svg>Optimized ${active.length} image${active.length>1?'s':''} · ${humanSize(totalOld)} → ${humanSize(totalNew)} · saved ${saved}%. Download each above.`;
+    });
+  })();
 
   // before/after slider
   const baRange=document.getElementById('baRange');
