@@ -82,7 +82,8 @@
     max-width: var(--maxw); margin:0 auto;
   }
   .logo{ display:flex; align-items:center; gap:11px; font-family: var(--logo-font); font-size: 30px; font-weight:600; letter-spacing:-0.01em; line-height:1; }
-  .logo .mark{ width:100%; height:62px; flex-shrink:0; overflow:visible; object-fit:contain; border-radius:8px; }
+  .logo .mark{ width:auto; height:62px; max-width:100%; flex-shrink:0; overflow:visible; object-fit:contain; border-radius:8px; }
+  @media (max-width: 480px){ .logo .mark{ height:42px; } }
   .logo .one{ color: var(--cyan); font-weight:600; }
   .logo .globe{ color: var(--text); font-weight:600; text-transform:uppercase; letter-spacing:0.01em; }
   .logo .dot{ color: var(--text); font-weight:600; }
@@ -111,16 +112,20 @@
   .btn-outline{ border-color: rgba(255,255,255,0.28); color: var(--text); }
   .btn-outline:hover{ border-color: var(--cyan); color: var(--cyan); }
 
-  .burger{ display:none; background:none; border:none; padding:8px; }
+  .burger{ display:none; background:none; border:none; padding:8px; flex-shrink:0; }
   .burger span, .burger::before, .burger::after{ content:''; display:block; width:20px; height:1.5px; background: var(--text); margin: 5px 0; }
   .mobile-menu{ display:none; }
+  .mobile-menu-cta{ display:none; }
 
   @media (max-width: 880px){
+    .nav{ flex-wrap:nowrap; }
     nav.links{ display:none; }
+    .nav-cta-btn{ display:none; }
     .burger{ display:block; }
-    .mobile-menu.open{ display:flex; flex-direction:column; padding: 8px 32px 22px; border-top: 1px solid var(--border-soft); }
+    .mobile-menu.open{ display:flex; flex-direction:column; padding: 8px 20px 22px; border-top: 1px solid var(--border-soft); }
     .mobile-menu a{ padding: 12px 0; font-size:15px; color: var(--text-muted); border-bottom: 1px solid var(--border-soft); }
     .mobile-menu a.active{ color: var(--cyan); }
+    .mobile-menu-cta{ display:flex; justify-content:center; margin-top:16px; border-bottom:none; padding:13px 22px; }
   }
 
   /* ---------- SECTIONS / TYPE ---------- */
@@ -551,7 +556,7 @@
       <a href="#/contact" data-route-link="/contact">Contact</a>
     </nav>
     <div class="nav-cta">
-      <a href="#/contact" class="btn btn-grad">Start a Conversation</a>
+      <a href="#/contact" class="btn btn-grad nav-cta-btn">Start a Conversation</a>
       <button class="burger" id="burgerBtn" aria-label="Toggle menu"></button>
     </div>
   </div>
@@ -561,6 +566,7 @@
     <a href="#/about" data-route-link="/about">About</a>
     <a href="#/insights" data-route-link="/insights">Insights</a>
     <a href="#/contact" data-route-link="/contact">Contact</a>
+    <a href="#/contact" class="btn btn-grad mobile-menu-cta">Start a Conversation</a>
   </div>
 </header>
 
@@ -1226,7 +1232,6 @@
       <div class="foot-brand">
         <a href="#/" class="logo">
           <img class="mark" src="./logo.jpeg" alt="one.GLOBE logo">
-          <span class="wordmark"><span class="one">one</span><span class="dot">.</span><span class="globe">GLOBE</span></span>
         </a>
         <p>We build the operating systems, checkout engines, and intelligence layers that ecommerce businesses run on.</p>
         <div class="social-row">
