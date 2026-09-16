@@ -6,7 +6,7 @@
 <title>one.GLOBE — Digital transformation, engineered</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg: #05070f;
@@ -22,6 +22,7 @@
     --grad: linear-gradient(100deg, var(--cyan) 0%, var(--mint) 100%);
     --serif: 'Fraunces', serif;
     --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --logo-font: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
     --mono: 'JetBrains Mono', ui-monospace, monospace;
     --maxw: 1180px;
   }
@@ -80,10 +81,11 @@
     padding: 16px 32px;
     max-width: var(--maxw); margin:0 auto;
   }
-  .logo{ display:flex; align-items:center; gap:10px; font-family: var(--sans); font-size: 20px; font-weight:500; }
-  .logo .mark{ width:26px; height:26px; flex-shrink:0; }
-  .logo .one{ color: var(--cyan); font-weight:500; }
-  .logo .globe{ color: var(--text); font-weight:700; letter-spacing:0.01em; }
+  .logo{ display:flex; align-items:center; gap:11px; font-family: var(--logo-font); font-size: 30px; font-weight:600; letter-spacing:-0.01em; line-height:1; }
+  .logo .mark{ width:100%; height:62px; flex-shrink:0; overflow:visible; object-fit:contain; border-radius:8px; }
+  .logo .one{ color: var(--cyan); font-weight:600; }
+  .logo .globe{ color: var(--text); font-weight:600; text-transform:uppercase; letter-spacing:0.01em; }
+  .logo .dot{ color: var(--text); font-weight:600; }
 
   nav.links{ display:flex; align-items:center; gap:2px; }
   nav.links a{
@@ -125,6 +127,15 @@
   section{ padding: 104px 0; }
   section.tight{ padding: 68px 0; }
   @media (max-width: 720px){ section{ padding: 64px 0; } }
+  @media (max-width: 480px){
+    .wrap{ padding: 0 20px; }
+    .nav{ padding: 14px 20px; }
+    .mobile-menu.open{ padding: 8px 20px 20px; }
+    section{ padding: 48px 0; }
+    h2{ font-size: 30px; }
+    .quote-wrap p{ font-size: 22px; }
+    .cta-band h2{ font-size: 24px; }
+  }
 
   h1,h2,h3,h4{ font-family: var(--serif); font-weight: 500; margin:0; letter-spacing: -0.015em; }
   h2{ font-size: 41px; line-height: 1.12; font-weight: 500; }
@@ -530,11 +541,7 @@
 <header class="site">
   <div class="nav">
     <a href="#/" class="logo">
-      <svg class="mark" viewBox="0 0 32 32" fill="none">
-        <circle cx="16" cy="16" r="9" stroke="#f3f5fb" stroke-width="1.4"/>
-        <ellipse cx="16" cy="16" rx="15" ry="5.2" stroke="#86d9f0" stroke-width="1.4" transform="rotate(-18 16 16)"/>
-      </svg>
-      <span class="wordmark"><span class="one">one</span><span class="globe">.GLOBE</span></span>
+      <img class="mark" src="./logo.jpeg" alt="one.GLOBE logo">
     </a>
     <nav class="links">
       <a href="#/" data-route-link="/">Home</a>
@@ -1218,11 +1225,8 @@
     <div class="foot-top">
       <div class="foot-brand">
         <a href="#/" class="logo">
-          <svg class="mark" viewBox="0 0 32 32" fill="none">
-            <circle cx="16" cy="16" r="9" stroke="#f3f5fb" stroke-width="1.4"/>
-            <ellipse cx="16" cy="16" rx="15" ry="5.2" stroke="#86d9f0" stroke-width="1.4" transform="rotate(-18 16 16)"/>
-          </svg>
-          <span class="wordmark"><span class="one">one</span><span class="globe">.GLOBE</span></span>
+          <img class="mark" src="./logo.jpeg" alt="one.GLOBE logo">
+          <span class="wordmark"><span class="one">one</span><span class="dot">.</span><span class="globe">GLOBE</span></span>
         </a>
         <p>We build the operating systems, checkout engines, and intelligence layers that ecommerce businesses run on.</p>
         <div class="social-row">
